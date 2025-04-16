@@ -18,9 +18,10 @@
     </gazebo>
 
     <gazebo>
-        <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
-        <parameters>$(find go2_description)/config/ros_control/ros_control.yaml</parameters>
-      </plugin>
+        <!-- <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control"> -->
+        <plugin name="gz_ros2_control::GazeboSimROS2ControlPlugin" filename="libgz_ros2_control-system.so">
+            <parameters>$(find go2_description)/config/ros_control.yaml</parameters>
+        </plugin>
     </gazebo>
 
     <gazebo reference="imu_link">
@@ -69,7 +70,8 @@
                 </z>
             </linear_acceleration>
             </imu>
-            <plugin name="imu_plugin" filename="libgazebo_ros_imu_sensor.so">
+            <!-- <plugin name="imu_plugin" filename="libgazebo_ros_imu_sensor.so"> -->
+            <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu">
                 <ros>
                     <namespace>imu</namespace>
                     <remapping>~/out:=data</remapping>
